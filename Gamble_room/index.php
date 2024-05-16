@@ -19,139 +19,6 @@ session_start();
 <body>
     <div id="title" >
         <h1 class="trs" trtxt="$title$">Gamble room</h1>
-        <h1 id="target">Get exactly <?php
-            if(!isset($_SESSION['game_start'])||$_SESSION['game_start']=false){
-                $_SESSION['target'] = rand(35, 70);
-                echo $_SESSION['target'];
-                $_SESSION['game_start']=true;
-            }else{
-                echo $_SESSION['target'];
-            }
-            $target = $_SESSION["target"];
-            if(isset($_POST['reset'])){
-                session_destroy();
-                header('Location: '.$_SERVER['SCRIPT_NAME']);
-            }
-            if(!isset($_SESSION['activep'])){
-                $_SESSION['activep']=0;
-            }
-            $active = $_SESSION['activep'];
-            
-            if(!isset($_SESSION['p1'])){
-                $_SESSION['p1']=(object)[
-                    'dice'=> array(),
-                    'win'=>false,
-                    'lose'=>false,
-                    'gmb'=>false, 
-                    'id'=>0
-                    ];
-            }
-            $dice1 = $_SESSION['p1'];
-            if(!isset($_SESSION['p2'])){
-                $_SESSION['p2']=(object)[
-                    'dice'=> array(),
-                    'win'=>false,
-                    'lose'=>false,
-                    'gmb'=>false,
-                    'id'=>1
-                    ];
-            }
-            $dice2 = $_SESSION['p2'];
-            if(!isset($_SESSION['p3'])){
-                $_SESSION['p3']=(object)[
-                    'dice'=> array(),
-                    'win'=>false,
-                    'lose'=>false,
-                    'gmb'=>false,
-                    'id'=>2
-                    ];
-            }
-            $dice3 = $_SESSION['p3'];
-            
-            function procDies($dice){
-                global $target;
-                global $active;
-                    echo "oughn ".array_sum($dice->dice)." ".isset($_POST["gamble"])." ".$target;
-                    if($dice->gmb){
-                        echo "tcugbhkkjl";
-                    }
-                if(!$dice->lose&&!$dice->win&&$active==$dice->id){
-                    if(array_sum($dice->dice)<$target&&isset($_POST["gamble"])){
-                        $r = rand(1, 6);
-                        echo "tebnnntenetnten ".$active." ".$dice->id;
-                        array_push($dice->dice, $r);
-                        $active = ($active+1)%3;
-                        $_SESSION['activep']=$active;
-                        header('Location: '.$_SERVER['SCRIPT_NAME']);
-                    }else if(array_sum($dice->dice)>$target&&count($dice->dice)<20&&$dice->gmb){
-                        $rm = array_sum($dice->dice)*(1-rand(1, 6)*0.15);
-                        echo "tebnnntenetnten ".$active." ".$dice->id;
-                        $diceNew = array();
-                        foreach($dice->dice as $die){
-                            if(array_sum($diceNew)+$die>=$rm)break;
-                            array_push($diceNew, $die);
-                        }
-                        $dice->dice = $diceNew;
-                        $active = ($active+1)%3;
-                        $_SESSION['activep']=$active;
-                        header('Location: '.$_SERVER['SCRIPT_NAME']);
-                    }else if(array_sum($dice->dice)==$target){
-                        echo "tebnnntenetnten ".$active." ".$dice->id;
-                        $dice->win=true;
-                        $active = -10;
-                        $_SESSION['activep']=$active;
-                    }else if(count($dice->dice)>=20){
-                        echo "tebnnntenetnten ".$active." ".$dice->id;
-                        $active = ($active+1)%3;
-                        $_SESSION['activep']=$active;
-                        $dice->lose=true;
-                    }else{
-                        echo "tebnnntenetnten ".$active." ".$dice->id." ".$dice->gmb;
-                        
-                    }
-                    $met = end($dice->dice);
-                    if(!empty($met))echo "<img src=\"img/dice{$met}.gif\">" ;
-                    echo "kbijnjnl ".$active." ".$dice->id;
-                }
-                unset($_POST["gamble"]);
-                $dice->gmb=false;
-            }
-            function out($dice){
-                global $target;
-                global $active;
-                echo 'class="';
-                if($active==$dice->id){
-                    echo "playing ";
-                }
-                if(array_sum($dice->dice)>$target){
-                    echo "overscore ";
-                }
-                if($dice->win){
-                    echo "zmaga ";
-                }
-                if($dice->lose){
-                    echo "overcube ";
-                }
-                echo '"';
-                echo ">";
-                echo '<div id="zmaga">';
-                echo '    Zmagal si!';
-                echo '</div>';
-                echo '<div id="overscore">';
-                echo '    Imaš preveč pik, <br>meči za koliko jih boš zgubil (15%/piko)';
-                echo '</div>';
-                echo '<div id="overcube">';
-                echo '    Metal si preveč kock in si zgubil';
-                echo '</div>';
-                foreach($dice->dice as $die){
-                    echo "<img src=\"img/dice".$die.".gif\">";
-                }
-                echo "tebnnntenetnten ".$active." ".$dice->id;
-                echo '</div';
-            }
-            
-            
-        ?> points</h1>
         <form method="POST" action="?action=reset" id = "resetf">
             <button id="reset" name="reset" >
                 Reset
@@ -159,85 +26,81 @@ session_start();
         </form>
     </div>
     <div id="main">
-        <div id="p1">
-            <div id="top">
-                <?php
-                //$active=1;
-                if(isset($_POST["gamble"])){
-                    echo "tcugbhkkjl";
-                    $dice1->gmb=true;
+        <form method="GET" >
+            <?php
+                if(isset($_POST['reset'])){
+                    session_destroy();
+                    header('Location: index.php');
                 }
-                procDies($dice1);
-                unset($_POST["gamble"]);
-                $_SESSION['p1'] = $dice1;
-                ?>
-            </div>
-            <div id="core">
-                <div id="left" <?php
-                        out($dice1);
-                    ?>>
-                <div id="right">
-                    <form method="POST" action="?action=gamble">
-                        <button id="gamble" name="gamble" >
-                            Gamble
-                        </button>
-                    </form>
+                if(isset($_GET["play"])){
+                    $_SESSION['p1']=(object)[
+                            'dice'=> array(),
+                            'win'=>false,
+                            'lose'=>false,
+                            'gmb'=>false, 
+                            'id'=>1,
+                            'ime'=>isset($_POST["ime1"])?$_POST["ime1"]:'--',
+                        ];
+                    $_SESSION['p2']=(object)[
+                            'dice'=> array(),
+                            'win'=>false,
+                            'lose'=>false,
+                            'gmb'=>false, 
+                            'id'=>2,
+                            'ime'=>isset($_POST["ime2"])?$_POST["ime2"]:'--',
+                        ];
+                    $_SESSION['p3']=(object)[
+                            'dice'=> array(),
+                            'win'=>false,
+                            'lose'=>false,
+                            'gmb'=>false, 
+                            'id'=>3,
+                            'ime'=>isset($_POST["ime3"])?$_POST["ime3"]:'--',
+                        ];
+                    $_SESSION['activep']=1;
+                    session_write_close();
+                    header('Location: play2.php');
+                    exit;
+                }
+            ?>
+            <div id="inp">
+                <div id="p1">
+                    <div id="core">
+                        <div id="right">
+                            <ul>
+                                <li>Player 1</li>
+                                <li><input id="name" name="name1" placeholder="User name"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="p2">
+                    <div id="core">
+                        <div id="right">
+                            <ul>
+                                <li>Player 2</li>
+                                <li><input id="name" name="name2" placeholder="User name"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="p3">
+                    <div id="core">
+                        <div id="right">
+                            <ul>
+                                <li>Player 3</li>
+                                <li><input id="name" name="name3" placeholder="User name"></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="p2">
-            <div id="top">
-                <?php
-                //$active=1;
-                if(isset($_POST["gamble"])){
-                    echo "tcugbhkkjl";
-                    $dice2->gmb=true;
-                }
-                procDies($dice2);
-                unset($_POST["gamble"]);
-                $_SESSION['p2'] = $dice2;
-                ?>
+            <div id="plbtn">
+                <button id="play" name="play" >
+                Play
+                </button>
             </div>
-            <div id="core">
-                <div id="left" <?php
-                        out($dice2);
-                    ?>>
-                <div id="right">
-                    <form method="POST" action="?action=gamble">
-                        <button id="gamble" name="gamble" >
-                            Gamble
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="p3">
-            <div id="top">
-                <?php
-                //$active=1;
-                if(isset($_POST["gamble"])){
-                    echo "tcugbhkkjl";
-                    $dice3->gmb=true;
-                }
-                procDies($dice3);
-                unset($_POST["gamble"]);
-                $_SESSION['p3'] = $dice3;
-                ?>
-            </div>
-            <div id="core">
-                <div id="left" <?php
-                        out($dice3);
-                    ?>>
-                <div id="right">
-                    <form method="POST" action="?action=gamble">
-                        <button id="gamble" name="gamble" >
-                            Gamble
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
+        </form>
     </div>
     <?php
     session_write_close();

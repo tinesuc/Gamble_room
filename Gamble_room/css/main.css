@@ -42,7 +42,8 @@ ul{
     scrollbar-color:rgb(0 0 0 / 0);
     position: relative;
     width: var(--inpw);
-        overflow: hidden;
+/*        overflow: hidden;*/
+        width:24rem;
 }
 
 span.animate{
@@ -117,11 +118,11 @@ img{
     position: relative;
 }
 #right{
-    min-height: 6rem;
-    padding: 10px 0;
-    width:50%;
+    min-height: 4rem;
+    /*padding: 10px 0;*/
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 #resetf{
     display: flex;
@@ -140,24 +141,39 @@ img{
     color: #ff0000;
     border: 2px solid #8a78d5;
 }
-#reset,#gamble,#play,#pauza,#help{
+#reset,#gamble,#play,#pauza,#help, #play{
     width: fit-content;
     min-width: 7rem;
     padding: 3px 6px;
     font-size: 1.45rem;
     height: 3rem;
-    margin-right: 0.7rem;
+    /*margin-right: 0.7rem;*/
     background-color: #714dad;
     border-radius: 2px;
     color: #6cff00;
     border: 2px solid #8a78d5;
 }
-#left:not(.playing) + #right #gamble{
+#right:has(ul){
+    margin:0 50px;
+}
+#play{
+    margin: 30px auto;
+}
+#text{
+    color:white;
+    font-size:3rem;
+}
+
+
+#main:not(:has( .playing1)) #p1 #right #gamble,
+#main:not(:has( .playing2)) #p2 #right #gamble,
+#main:not(:has( .playing3)) #p3 #right #gamble
+{
     color:grey;
     background-color: #333333;
     border-color: #232323;
-/*    cursor: not-allowed;
-    pointer-events:none;*/
+    cursor: not-allowed;
+    pointer-events:none;
 }
 #zmaga, #overscore, #overcube{
     display:none;
@@ -184,11 +200,27 @@ img{
     display: block;
 }
 #left.overcube #overcube{
-    color: #0ce900;
+    color: #e90000;
     font-size: 4rem;
     display: block;
 }
-
+#main:has(input){
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    align-items: center;
+}
+form:has(input) > #inp{
+    display:flex;
+    flex-direction: row;
+}
+form:has(input) > #inp > div{
+    border: 2px solid gray;
+    border-radius: 4px;
+}
+form:has(input) > #plbtn{
+    display: flex;
+}
 li{
     padding:3px 6px 3px 0;
     font-size:1.1rem;
@@ -197,7 +229,13 @@ li{
     flex-direction: column;
     position:relative;
     margin: 0.7rem 0.7rem 0 0;
+/*    background-color: darkgrey;*/
     float: left;
+    color: white;
+    font-size: 3rem;
+    line-height: 3rem;
+    height: 3rem;
+    width:24rem;
 }
 li > div:has(#regen){
     flex-direction: row;
@@ -219,9 +257,7 @@ li > div.br > span:last-child{
     left: 132px;
     margin-top: 5px
 }
-li:not(:has(*)){
-    margin: 0 0 0 40%;
-}
+
 li > span.br:first-child{
     margin: auto 6px auto 0px;
     flex: 1;
@@ -253,7 +289,13 @@ li input{
     margin:auto 0;
     left: 1px;
     position: absolute;
-    background-color: #00000000;
+    background-color: #afafaf;
+    color: white;
+    font-size: 3rem;
+    line-height: 3rem;
+    height: 3rem;
+    width:24rem;
+    border-radius: 4px;
 }
 li input[type="number"]{
     left: 0px;
