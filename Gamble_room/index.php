@@ -39,7 +39,7 @@ session_start();
                             'lose'=>false,
                             'gmb'=>false, 
                             'id'=>1,
-                            'name'=>isset($_POST["name1"])?$_POST["name1"]:'--',
+                            'name'=>isset($_POST["name1"])&&!empty($_POST["name1"])?$_POST["name1"]:'--',
                         ];
                     $_SESSION['p2']=(object)[
                             'dice'=> array(),
@@ -47,7 +47,7 @@ session_start();
                             'lose'=>false,
                             'gmb'=>false, 
                             'id'=>2,
-                            'name'=>isset($_POST["name2"])?$_POST["name2"]:'--',
+                            'name'=>isset($_POST["name2"])&&!empty($_POST["name2"])?$_POST["name2"]:'--',
                         ];
                     $_SESSION['p3']=(object)[
                             'dice'=> array(),
@@ -55,7 +55,7 @@ session_start();
                             'lose'=>false,
                             'gmb'=>false, 
                             'id'=>3,
-                            'name'=>isset($_POST["name3"])?$_POST["name3"]:'--',
+                            'name'=>isset($_POST["name3"])&&!empty($_POST["name3"])?$_POST["name3"]:'--',
                         ];
                     $_SESSION['activep']=1;
                     session_write_close();
