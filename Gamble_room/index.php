@@ -26,20 +26,20 @@ session_start();
         </form>
     </div>
     <div id="main">
-        <form method="GET" >
+        <form method="POST" >
             <?php
                 if(isset($_POST['reset'])){
                     session_destroy();
                     header('Location: index.php');
                 }
-                if(isset($_GET["play"])){
+                if(isset($_POST["play"])){
                     $_SESSION['p1']=(object)[
                             'dice'=> array(),
                             'win'=>false,
                             'lose'=>false,
                             'gmb'=>false, 
                             'id'=>1,
-                            'ime'=>isset($_POST["ime1"])?$_POST["ime1"]:'--',
+                            'name'=>isset($_POST["name1"])?$_POST["name1"]:'--',
                         ];
                     $_SESSION['p2']=(object)[
                             'dice'=> array(),
@@ -47,7 +47,7 @@ session_start();
                             'lose'=>false,
                             'gmb'=>false, 
                             'id'=>2,
-                            'ime'=>isset($_POST["ime2"])?$_POST["ime2"]:'--',
+                            'name'=>isset($_POST["name2"])?$_POST["name2"]:'--',
                         ];
                     $_SESSION['p3']=(object)[
                             'dice'=> array(),
@@ -55,7 +55,7 @@ session_start();
                             'lose'=>false,
                             'gmb'=>false, 
                             'id'=>3,
-                            'ime'=>isset($_POST["ime3"])?$_POST["ime3"]:'--',
+                            'name'=>isset($_POST["name3"])?$_POST["name3"]:'--',
                         ];
                     $_SESSION['activep']=1;
                     session_write_close();

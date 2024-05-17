@@ -216,7 +216,7 @@ function proc($dice, $id){
                             out($dice1);
                         ?>>
                     <div id="text"><?php
-                        echo $dice1->ime;
+                        echo $dice1->name;
                     ?></div>
                     <div id="right">
                             <button id="gamble" name="gamble1" >
@@ -237,7 +237,7 @@ function proc($dice, $id){
                             out($dice2);
                         ?>>
                     <div id="text"><?php
-                        echo $dice2->ime;
+                        echo $dice2->name;
                     ?></div>
                     <div id="right">
                             <button id="gamble" name="gamble2" >
@@ -258,7 +258,7 @@ function proc($dice, $id){
                             out($dice3);
                         ?>>
                     <div id="text"><?php
-                        echo $dice3->ime;
+                        echo $dice3->name;
                     ?></div>
                     <div id="right">
                             <button id="gamble" name="gamble3" >
