@@ -198,11 +198,11 @@ function proc($dice, $id){
         <h1 id="target">Get exactly <?php
             echo $target;
         ?> points</h1>
-        <form method="POST" action="index.php?action=reset" id = "resetf">
+<!--        <form method="POST" action="index.php?action=reset" id = "resetf">
             <button id="reset" name="reset" >
                 Reset
             </button>
-        </form>
+        </form>-->
     </div>
     <form method="POST">
         <div id="main">

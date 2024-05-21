@@ -19,11 +19,11 @@ session_start();
 <body>
     <div id="title" >
         <h1 class="trs" trtxt="$title$">Gamble room</h1>
-        <form method="POST" action="?action=reset" id = "resetf">
+<!--        <form method="POST" action="?action=reset" id = "resetf">
             <button id="reset" name="reset" >
                 Reset
             </button>
-        </form>
+        </form>-->
     </div>
     <div id="main">
         <form method="POST" >
