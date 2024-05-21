@@ -70,7 +70,7 @@ function procDies($dice) {
         if (isset($_POST["gamble" . $dice->id])&&array_sum($dice->dice)<$target&&count($dice->dice)<20) {
             $r = rand(1, 6);
             array_push($dice->dice, $r);
-            echo "<img src=\"img/dice{$r}.gif\">" ;
+            echo "<img src=\"img/dice{$r}.png\">" ;
             
             if (array_sum($dice->dice) < $target) {
                 incActive();
@@ -88,7 +88,7 @@ function procDies($dice) {
         if(isset($_POST["gamble" . $dice->id])&&array_sum($dice->dice)>$target&&count($dice->dice)<20){
             $r = rand(1, 6);
             $rm = array_sum($dice->dice)*(1-$r*0.15);
-            echo "<img src=\"img/dice{$r}.gif\">" ;
+            echo "<img src=\"img/dice{$r}.png\">" ;
             $diceNew = array();
             foreach($dice->dice as $die){
                 if (array_sum($diceNew) + $die >= $rm) {
@@ -162,7 +162,7 @@ function out($dice) {
     echo '    You threw too many dice and lost!';
     echo '</div>';
     foreach($dice->dice as $die){
-        echo "<img src=\"img/dice".$die.".gif\">";
+        echo "<img src=\"img/dice".$die.".png\">";
     }
     echo '</div';
 }

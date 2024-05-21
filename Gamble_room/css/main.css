@@ -109,6 +109,7 @@ img{
     width:100px;
     height:100px;
     margin: 0 auto;
+    filter: invert(1);
 }
 #left{
     width:500px;
