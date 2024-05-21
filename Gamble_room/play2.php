@@ -27,7 +27,7 @@ function alllose(){
         echo "<script>setTimeout(function()    {   "
                 . "form = document.createElement('form');"
                 . "form.method='POST';"
-                . "form.action='index.php';"
+                . "form.action='index.php?action=reset';"
                 . "inp = document.createElement('button');"
                 . "inp.name = 'reset';"
                 . "form.appendChild(inp);"
@@ -55,7 +55,7 @@ function wins($dice){
     . "setTimeout(function()    {   "
             . "form = document.createElement('form');"
             . "form.method='POST';"
-            . "form.action='index.php';"
+            . "form.action='index.php?action=reset';"
             . "inp = document.createElement('button');"
             . "inp.name = 'reset';"
             . "form.appendChild(inp);"
@@ -115,7 +115,7 @@ function procDies($dice) {
          echo "<script>setTimeout(function()    {   "
             . "form = document.createElement('form');"
             . "form.method='POST';"
-            . "form.action='index.php';"
+            . "form.action='index.php?action=reset';"
             . "inp = document.createElement('button');"
             . "inp.name = 'reset';"
             . "form.appendChild(inp);"
@@ -191,6 +191,7 @@ function proc($dice, $id){
     <script src="js/lib.js"></script>
     <script src="js/main.js"></script>
     <script src="js/jquery.fireworks.js"></script>
+    
 </head>
 <body>
     <div id="title" >
@@ -198,11 +199,11 @@ function proc($dice, $id){
         <h1 id="target">Get exactly <?php
             echo $target;
         ?> points</h1>
-<!--        <form method="POST" action="index.php?action=reset" id = "resetf">
+        <form method="POST" action="index.php?action=reset" id = "resetf">
             <button id="reset" name="reset" >
                 Reset
             </button>
-        </form>-->
+        </form>
     </div>
     <form method="POST">
         <div id="main">
@@ -275,6 +276,21 @@ function proc($dice, $id){
         </div>
     </form>
 </body>
+<?php
+        echo "<script>$(document).on('keypress',function(e) {"
+                . "if(e.which == KEYCODE_ESC) {   "
+                . "console.log('izwbvnw,v');"
+                    . "form = document.createElement('form');"
+                    . "form.method='POST';"
+                    . "form.action='index.php?action=reset';"
+                    . "inp = document.createElement('button');"
+                    . "inp.name = 'reset';"
+                    . "form.appendChild(inp);"
+                    . "document.body.appendChild(form);"
+                    . "form.submit();"
+                . "}"
+            . "});</script>";
+    ?>
 </html>
 
 <?php

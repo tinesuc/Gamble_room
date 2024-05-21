@@ -15,15 +15,16 @@ session_start();
     <script src="js/lib.js"></script>
     <script src="js/main.js"></script>
     <script src="js/translate.js"></script>
+    
 </head>
 <body>
     <div id="title" >
         <h1 class="trs" trtxt="$title$">Gamble room</h1>
-<!--        <form method="POST" action="?action=reset" id = "resetf">
+        <form method="POST" action="?action=reset" id = "resetf">
             <button id="reset" name="reset" >
                 Reset
             </button>
-        </form>-->
+        </form>
     </div>
     <div id="main">
         <form method="POST" >
@@ -33,6 +34,7 @@ session_start();
                     header('Location: index.php');
                 }
                 if(isset($_POST["play"])){
+                    //session_destroy();
                     $_SESSION['p1']=(object)[
                             'dice'=> array(),
                             'win'=>false,
@@ -61,6 +63,8 @@ session_start();
                     session_write_close();
                     header('Location: play2.php');
                     exit;
+                }else{
+                    session_destroy();
                 }
             ?>
             <div id="inp">
@@ -102,6 +106,21 @@ session_start();
             </div>
         </form>
     </div>
+    <?php
+        echo "<script>$(document).on('keypress',function(e) {"
+                . "if(e.which == KEYCODE_ESC) {   "
+                . "console.log('izwbvnw,v');"
+                    . "form = document.createElement('form');"
+                    . "form.method='POST';"
+                    . "form.action='index.php?action=reset';"
+                    . "inp = document.createElement('button');"
+                    . "inp.name = 'reset';"
+                    . "form.appendChild(inp);"
+                    . "document.body.appendChild(form);"
+                    . "form.submit();"
+                . "}"
+            . "});</script>";
+    ?>
     <?php
     session_write_close();
     ?>
