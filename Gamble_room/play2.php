@@ -191,6 +191,20 @@ function proc($dice, $id){
     <script src="js/lib.js"></script>
     <script src="js/main.js"></script>
     <script src="js/jquery.fireworks.js"></script>
+    <?php
+        echo "<script>$(document).on('keypress',function(e) {"
+                . "if(e.which == 119) {   "
+                    . "form = document.createElement('form');"
+                    . "form.method='POST';"
+                    . "form.action='index.php?action=reset';"
+                    . "inp = document.createElement('button');"
+                    . "inp.name = 'reset';"
+                    . "form.appendChild(inp);"
+                    . "document.body.appendChild(form);"
+                    . "form.submit();"
+                . "}"
+            . "});</script>";
+    ?>
 </head>
 <body>
     <div id="title" >
@@ -198,11 +212,11 @@ function proc($dice, $id){
         <h1 id="target">Get exactly <?php
             echo $target;
         ?> points</h1>
-<!--        <form method="POST" action="index.php?action=reset" id = "resetf">
+        <form method="POST" action="index.php?action=reset" id = "resetf">
             <button id="reset" name="reset" >
                 Reset
             </button>
-        </form>-->
+        </form>
     </div>
     <form method="POST">
         <div id="main">
