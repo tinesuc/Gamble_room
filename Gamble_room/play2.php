@@ -50,7 +50,9 @@ function wins($dice){
     $_SESSION['win']=$dice->id;
     $active = -10;
     $_SESSION['activep']=$active;
-    echo "<script>setTimeout(function()    {   "
+    echo "<script>"
+    . "$('body').fireworks();"
+    . "setTimeout(function()    {   "
             . "form = document.createElement('form');"
             . "form.method='POST';"
             . "form.action='index.php';"
@@ -188,7 +190,7 @@ function proc($dice, $id){
     </script>
     <script src="js/lib.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/translate.js"></script>
+    <script src="js/jquery.fireworks.js"></script>
 </head>
 <body>
     <div id="title" >
