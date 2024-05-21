@@ -28,7 +28,7 @@ h1{
     height: 8rem;
     color: #9800e3;
     width: fit-content;
-    MARGIN-LEFT: 5REM;
+    /*MARGIN-LEFT: 5REM;*/
 }
 /*.folded_input .info_item > .input{
     min-width:10ch !important;
