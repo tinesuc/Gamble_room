@@ -194,16 +194,19 @@ img{
     color: #e90000;
     font-size: 3rem;
     display: block;
+    z-index: 10;
 }
 #left.zmaga #zmaga{
     color: #0ce900;
     font-size: 4rem;
     display: block;
+    z-index: 10;
 }
 #left.overcube #overcube{
     color: #e90000;
     font-size: 4rem;
     display: block;
+    z-index: 10;
 }
 #main:has(input){
     display:flex;
